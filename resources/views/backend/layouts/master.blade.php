@@ -26,8 +26,12 @@
     <link rel="stylesheet" href="{{ URL::asset('backend')}}/css/default-css.css">
     <link rel="stylesheet" href="{{ URL::asset('backend')}}/css/styles.css">
     <link rel="stylesheet" href="{{ URL::asset('backend')}}/css/responsive.css">
+    <!-- jquery latest version -->
+    <script src="{{ URL::asset('backend')}}/js/vendor/jquery-2.2.4.min.js"></script>
     <!-- modernizr css -->
     <script src="{{ URL::asset('backend')}}/js/vendor/modernizr-2.8.3.min.js"></script>
+    @stack('styles')
+    @stack('scripts')
 </head>
 
 <body>

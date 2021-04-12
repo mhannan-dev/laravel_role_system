@@ -14,13 +14,18 @@
                         <form action="{{ route('roles.store') }}" method="POST">
                             @csrf
                             <input type="text" class="form-control" name="name" placeholder="Enter role name">
-                            <div class="form-row ml-2">
-                                <label for="name">Permissions &nbsp;</label>
-    
+                            <div class="form-group">
+                                <label for="name">Permissions</label>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="checkPermissionAll" value="1">
+                                    <label class="form-check-label" for="checkPermissionAll">All</label>
+                                </div>
+                                <hr>
+                                
                                 @foreach ($permissions as $permission)
                                 <div class="form-check">
                                     <input type="checkbox" class="form-check-input" name="permissions[]" id="checkPermission{{ $permission->id }}" value="{{ $permission->name }}">
-                                    <label class="form-check-label" for="checkPermission{{ $permission->id }}">{{ $permission->name }}</label> &nbsp;
+                                    <label class="form-check-label" for="checkPermission{{ $permission->id }}">{{ $permission->name }}</label>
                                 </div>
                                 @endforeach
                             </div>
@@ -34,3 +39,21 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script type="text/javascript">
+    
+    $(document).ready(function() { //you can replace $ with Jquery
+        $("#checkPermissionAll").click(function(){
+             if($(this).is(':checked')){
+                 //Check all the checkbox
+                 $('input[type=checkbox]').prop('checked', true);
+             }else{
+                 //Un check all the checkbox
+                 $('input[type=checkbox]').prop('checked', false);
+             }
+         });
+    });
+</script>
+
+@endpush

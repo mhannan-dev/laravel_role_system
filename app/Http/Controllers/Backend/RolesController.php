@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Permission;
-
+use App\User;
 class RolesController extends Controller
 {
     /**
@@ -31,6 +31,8 @@ class RolesController extends Controller
     {
         $data['title'] = "Create new permission";
         $data['permissions'] = Permission::all();
+        $data['permission_groups'] = User::getpermissionGroups();
+        dd($data['permission_groups']);
         
         return view('backend.pages.roles.create', $data);
     }
