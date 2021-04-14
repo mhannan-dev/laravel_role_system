@@ -12,7 +12,7 @@
                     <li>
                         <a href="javascript:void(0)" aria-expanded="true"><i class="ti-dashboard"></i><span>roles</span></a>
                         <ul class="collapse">
-                            <li><a href="{{ route('roles.index') }}">View</a></li>
+                            <li><a href="{{ route('admin.roles.index') }}">View</a></li>
                             
                         </ul>
                     </li>

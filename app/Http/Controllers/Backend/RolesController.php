@@ -32,7 +32,7 @@ class RolesController extends Controller
         $data['title'] = "Create new permission";
         $data['permissions'] = Permission::all();
         $data['permission_groups'] = User::getpermissionGroups();
-        dd($data['permission_groups']);
+        //dd($data['permission_groups']);
         
         return view('backend.pages.roles.create', $data);
     }
