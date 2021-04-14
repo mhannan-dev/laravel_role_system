@@ -3,10 +3,10 @@
 @section('styles')
     <style type="text/stylesheet">
         .form-check-label {
-                text-transform: capitalize;
-            }
+                    text-transform: capitalize;
+                }
 
-        </style>
+            </style>
 @stop
 @section('main-content')
     <div class="main-content-inner">
@@ -50,7 +50,7 @@
                                             @endphp
                                             @foreach ($permissions as $permission)
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" name="permissions[]"
+                                                    <input type="checkbox"  {{ $role->hasPermissionTo($permission->name) ? 'checked' : '' }} class="form-check-input" name="permissions[]"
                                                         id="checkPermission{{ $permission->id }}"
                                                         value="{{ $permission->name }}">
                                                     <label class="form-check-label text-capitalize"
@@ -75,6 +75,5 @@
         </div>
     </div>
 
-@include('backend.pages.roles.partials.scripts')
+    @include('backend.pages.roles.partials.scripts')
 @endsection
-

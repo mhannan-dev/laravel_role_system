@@ -69,7 +69,7 @@ class RolesController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -80,7 +80,11 @@ class RolesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['role'] = Role::findOrFail($id);
+        $data['title'] = "Create new permission";
+        $data['permissions'] = Permission::all();
+        $data['permission_groups'] = User::getpermissionGroups();
+        return view('backend.pages.roles.edit', $data);
     }
 
     /**

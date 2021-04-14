@@ -30,8 +30,8 @@
     <script src="{{ URL::asset('backend')}}/js/vendor/jquery-2.2.4.min.js"></script>
     <!-- modernizr css -->
     <script src="{{ URL::asset('backend')}}/js/vendor/modernizr-2.8.3.min.js"></script>
-    @stack('styles')
-    @stack('scripts')
+    @yield('styles')
+   
 </head>
 
 <body>
@@ -57,6 +57,7 @@
     </div>
     <!-- page container area end -->
     @include('backend.partials.scripts')
+    @yield('scripts')
 </body>
 
 </html>
