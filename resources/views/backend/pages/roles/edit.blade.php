@@ -9,6 +9,23 @@
             </style>
 @stop
 @section('main-content')
+<!-- page title area start -->
+<div class="page-title-area">
+    <div class="row align-items-center">
+        <div class="col-sm-6">
+            <div class="breadcrumbs-area clearfix">
+                <h4 class="page-title pull-left">
+                    <a href="{{ route('admin.dashboard') }}">Dashboard</a>
+                </h4>
+                <ul class="breadcrumbs pull-left">
+                    <li><a href="{{ route('admin.roles.index') }}">All Roles</a></li>
+                    <li><span>Edit Role</span></li>
+                </ul>
+            </div>
+        </div>
+        @include('backend.partials.logout')
+    </div>
+</div>
     <div class="main-content-inner">
         <div class="row">
             <!-- Dark table start -->
@@ -22,7 +39,7 @@
                             <div class="form-group">
                                 <label for="name">Role Name</label>
                                 <input type="text" class="form-control" id="name" name="name"
-                                    placeholder="Enter a Role Name">
+                                    value="{{ $role->name }}">
                             </div>
                             <div class="form-group">
                                 <label for="name">Permissions</label>
@@ -46,6 +63,7 @@
                                         <div class="col-9 role-{{ $i }}-management-checkbox">
                                             @php
                                                 $permissions = App\User::getpermissionsByGroupName($group->name);
+                                                $roleHasPermission = App\User::rolehasPermission($group->name);
                                                 $j = 1;
                                             @endphp
                                             @foreach ($permissions as $permission)

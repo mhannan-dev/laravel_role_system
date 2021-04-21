@@ -81,6 +81,7 @@ class RolesController extends Controller
     public function edit($id)
     {
         $data['role'] = Role::findOrFail($id);
+        
         $data['title'] = "Create new permission";
         $data['permissions'] = Permission::all();
         $data['permission_groups'] = User::getpermissionGroups();

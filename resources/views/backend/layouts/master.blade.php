@@ -47,7 +47,7 @@
         <!-- main content area start -->
         <div class="main-content">
            @include('backend.partials.top_nav')
-            @include('backend.partials.page_title')
+            
             <!-- page title area end -->
             @yield('main-content')
         </div>
