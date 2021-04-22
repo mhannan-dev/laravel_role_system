@@ -30,7 +30,7 @@ class RolesController extends Controller
     public function create()
     {
         $data['title'] = "Create new permission";
-        $data['permissions'] = Permission::all();
+        $data['all_permissions'] = Permission::all();
         $data['permission_groups'] = User::getpermissionGroups();
         //dd($data['permission_groups']);
         
@@ -57,7 +57,7 @@ class RolesController extends Controller
         if (!empty($permissions)) {
             $role->syncPermissions($permissions);
         }
-        toast('Data added successfully !!', 'success');
+        toastr('Data added successfully !!', 'success');
         return back();
     }
 
@@ -81,9 +81,8 @@ class RolesController extends Controller
     public function edit($id)
     {
         $data['role'] = Role::findOrFail($id);
-        
         $data['title'] = "Create new permission";
-        $data['permissions'] = Permission::all();
+        $data['all_permissions'] = Permission::all();
         $data['permission_groups'] = User::getpermissionGroups();
         return view('backend.pages.roles.edit', $data);
     }
@@ -97,7 +96,20 @@ class RolesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         // Validation Data
+         $request->validate([
+            'name' => 'required|max:100'
+        ], [
+            'name.requried' => 'Please give a role name'
+        ]);
+        $role = Role::findOrFail($id);
+        $permissions = $request->input('permissions');
+
+        if (!empty($permissions)) {
+            $role->syncPermissions($permissions);
+        }
+        toastr('Data updated successfully !!', 'success');
+        return back();
     }
 
     /**
