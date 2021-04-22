@@ -15,7 +15,7 @@
                     </h4>
                     <ul class="breadcrumbs pull-left">
                         <li><a href="{{ route('admin.roles.index') }}">All Roles</a></li>
-                        <li><span>Edit Role</span></li>
+                        <li><span>Create Role</span></li>
                     </ul>
                 </div>
             </div>

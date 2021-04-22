@@ -10,9 +10,22 @@
             <nav>
                 <ul class="metismenu" id="menu">
                     <li>
-                        <a href="javascript:void(0)" aria-expanded="true"><i class="ti-dashboard"></i><span>roles</span></a>
+                        <a href="javascript:void(0)" aria-expanded="true"><i class="ti-dashboard text-danger"></i><span>
+                            dashboard
+                        </span></a>
                         <ul class="collapse">
-                            <li><a href="{{ route('admin.roles.index') }}">View</a></li>
+                            <li class="{{ Route::is('admin.dashboard') ? 'active' : '' }}"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                           
+                            
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" aria-expanded="true"><i class="ti-dashboard text-success"></i><span>
+                            Roles & Permissions
+                        </span></a>
+                        <ul class="collapse {{ Route::is('admin.roles.create') || Route::is('admin.roles.index') || Route::is('admin.roles.edit') || Route::is('admin.roles.show') ? 'in' : '' }}">
+                            <li><a href="{{ route('admin.roles.index') }}">All Roles</a></li>
+                            <li><a href="{{ route('admin.roles.create') }}">Create Role</a></li>
                             
                         </ul>
                     </li>

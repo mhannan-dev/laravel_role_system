@@ -98,7 +98,7 @@ class RolesController extends Controller
     {
          // Validation Data
          $request->validate([
-            'name' => 'required|max:100'
+            'name' => 'required|max:100|unique:roles,name,' . $id
         ], [
             'name.requried' => 'Please give a role name'
         ]);
@@ -120,6 +120,12 @@ class RolesController extends Controller
      */
     public function destroy($id)
     {
-        //
+       
+        $role = Role::findById($id);
+        if (!is_null($role)) {
+            $role->delete();
+        }
+        toastr('Role has been deleted !!', 'success');
+        return back();
     }
 }

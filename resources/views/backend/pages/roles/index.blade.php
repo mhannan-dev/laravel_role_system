@@ -37,14 +37,15 @@
 
                         <h4 class="header-title">{{ $title }}</h4>
 
-                        <div class="data-tables datatable-dark">
+                        <div class="data-tables">
                             <table id="dataTable3" class="text-center">
                                 <thead class="text-capitalize">
                                     <tr>
-                                        <th>SL</th>
-                                        <th>Name</th>
-                                        <th>Guard</th>
-                                        <th>Actions</th>
+                                        <th width="5%">SL</th>
+                                        <th width="10%">Name</th>
+                                        <th width="70%">Permissions</th>
+                                        
+                                        <th width="15%">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -54,12 +55,29 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $role->name }}</td>
+                                            <td>
+                                                @foreach ($role->permissions  as $item)
+                                                <span class="badge badge-success">
+                                                    {{ $item->name }}
+                                                </span>
+                                                    
+                                                @endforeach
+                                            </td>
                                             <td>{{ $role->guard_name }}</td>
                                             <td>
-                                                <a href=""><i class="fa fa-trash fa-2x text-danger"></i></a> &nbsp;
+                                                
                                                 <a href="{{ route('admin.roles.edit', $role->id) }}">
                                                     <i class="fa fa-edit fa-2x text-warning"></i>
                                                 </a>
+                                                <a href="{{ route('admin.roles.destroy', $role->id) }}"
+                                                    onclick="event.preventDefault(); document.getElementById('delete-form-{{ $role->id }}').submit();">
+                                                    <i class="fa fa-trash fa-2x text-danger"></i>
+                                                    </a>
+        
+                                                    <form id="delete-form-{{ $role->id }}" action="{{ route('admin.roles.destroy', $role->id) }}" method="POST" style="display: none;">
+                                                        @method('DELETE')
+                                                        @csrf
+                                                    </form>
                                             </td>
                                         </tr>
                                     @endforeach
