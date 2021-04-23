@@ -58,6 +58,8 @@
     <!-- page container area end -->
     @include('backend.partials.scripts')
     @yield('scripts')
+    @toastr_js
+    @toastr_render
 </body>
 
 </html>

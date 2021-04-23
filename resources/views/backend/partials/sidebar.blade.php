@@ -29,6 +29,16 @@
                             
                         </ul>
                     </li>
+                    <li>
+                        <a href="javascript:void(0)" aria-expanded="true"><i class="ti-user text-success"></i><span>
+                            Users
+                        </span></a>
+                        <ul class="collapse {{ Route::is('admin.users.create') || Route::is('admin.users.index') || Route::is('admin.users.edit') || Route::is('admin.users.show') ? 'in' : '' }}">
+                            <li><a href="{{ route('admin.users.index') }}">All Users</a></li>
+                            <li><a href="{{ route('admin.users.create') }}">Create User</a></li>
+                            
+                        </ul>
+                    </li>
                     
                    
                 </ul>

@@ -15,5 +15,3 @@
 <!-- others plugins -->
 <script src="{{ URL::asset('backend')}}/js/plugins.js"></script>
 <script src="{{ URL::asset('backend')}}/js/scripts.js"></script>
-@toastr_js
-@toastr_render
