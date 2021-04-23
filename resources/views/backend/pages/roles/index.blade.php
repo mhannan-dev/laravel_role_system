@@ -43,9 +43,9 @@
                                     <tr>
                                         <th width="5%">SL</th>
                                         <th width="10%">Name</th>
-                                        <th width="70%">Permissions</th>
+                                        <th width="60%">Permissions</th>
                                         
-                                        <th width="15%">Actions</th>
+                                        <th width="20%">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>

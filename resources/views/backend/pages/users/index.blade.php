@@ -39,8 +39,8 @@
                                     <th width="5%">SL</th>
                                     <th width="10%">Name</th>
                                     <th width="10%">Email</th>
-                                    <th width="40%">Roles</th>
-                                    <th width="15%">Actions</th>
+                                    <th width="50%">Roles</th>
+                                    <th width="25%">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -50,7 +50,11 @@
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>
-                                        users
+                                        @foreach ($user->roles as $role)
+                                            <span class="badge badge-warning">
+                                                {{ $role->name }}
+                                            </span>
+                                        @endforeach
                                     </td>
                                     <td>
                                         <a href="{{ route('admin.users.edit', $user->id) }}">

@@ -1,12 +1,10 @@
 <?php
-
 namespace App\Http\Controllers\Backend;
 use App\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
-
 class UsersController extends Controller
 {
     /**
@@ -20,7 +18,6 @@ class UsersController extends Controller
         $data['users'] = User::all();
         return view('backend.pages.users.index', $data);
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -31,10 +28,8 @@ class UsersController extends Controller
         $data['title'] = "Create new user";
         $data['users'] = User::all();
         $data['roles'] = Role::all();
-        
         return view('backend.pages.users.create', $data);
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -60,9 +55,7 @@ class UsersController extends Controller
         }
         toastr('Data added successfully !!', 'success');
         return redirect()->route('admin.users.index');
-        
     }
-
     /**
      * Display the specified resource.
      *
@@ -71,9 +64,7 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -82,11 +73,11 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
+        $data['title'] = "Edit User";
         $data['user'] = User::findOrFail($id);
-        $data['title'] = "Create new user";
+        $data['roles'] = Role::all();
         return view('backend.pages.users.edit', $data);
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -96,22 +87,27 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-         // Validation Data
-         $request->validate([
-            'name' => 'required|max:100|unique:Users,name,' . $id
-        ], [
-            'name.requried' => 'Please give a User name'
+         // Create New User
+        $user = User::find($id);
+        // Validation Data
+        $request->validate([
+            'name' => 'required|max:50',
+            'email' => 'required|max:100|email|unique:users,email,' . $id,
+            'password' => 'nullable|min:6|confirmed',
         ]);
-        $user = User::findOrFail($id);
-        $permissions = $request->input('permissions');
-
-        if (!empty($permissions)) {
-            $user->syncPermissions($permissions);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        if ($request->password) {
+            $user->password = Hash::make($request->password);
+        }
+        $user->save();
+        $user->roles()->detach();
+        if ($request->roles) {
+            $user->assignRole($request->roles);
         }
         toastr('Data updated successfully !!', 'success');
         return back();
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -120,8 +116,7 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-       
-        $user = User::findById($id);
+        $user = User::findOrFail($id);
         if (!is_null($user)) {
             $user->delete();
         }
