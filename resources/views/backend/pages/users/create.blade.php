@@ -1,7 +1,7 @@
 @extends('backend.layouts.master')
 @section('title', 'Roles Page')
 @section('styles')
-   
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 @stop
 @section('main-content')
     <div class="main-content-inner">
@@ -55,7 +55,7 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6 col-sm-12">
                                     <label for="password">Assign Roles</label>
-                                    <select name="roles[]" id="roles" class="form-control" multiple>
+                                    <select name="roles[]" id="roles" class="form-control select2" multiple>
                                         @foreach ($roles as $role)
                                             <option value="{{ $role->name }}">{{ $role->name }}</option>
                                         @endforeach
@@ -72,7 +72,13 @@
             <!-- Dark table end -->
         </div>
     </div>
-
-
+@endsection
+@section('scripts')
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.select2').select2();
+    })
+</script>
 @endsection
 

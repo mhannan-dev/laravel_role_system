@@ -5,6 +5,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -42,20 +43,24 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        // Validation Data
-        $request->validate([
-            'name' => 'required|max:100|unique:Users'
-        ], [
-            'name.requried' => 'Please give a User name'
+         // Validation Data
+         $request->validate([
+            'name' => 'required|max:50',
+            'email' => 'required|max:100|email|unique:users',
+            'password' => 'required|min:6|confirmed',
         ]);
-        $user = User::create(['name' => $request->name]);
-        $permissions = $request->input('permissions');
-
-        if (!empty($permissions)) {
-            $user->syncPermissions($permissions);
+        // Create New User
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->save();
+        if ($request->roles) {
+            $user->assignRole($request->roles);
         }
         toastr('Data added successfully !!', 'success');
-        return back();
+        return redirect()->route('admin.users.index');
+        
     }
 
     /**
