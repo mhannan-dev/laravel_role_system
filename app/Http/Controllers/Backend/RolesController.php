@@ -45,6 +45,7 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request);
         // Validation Data
         $request->validate([
             'name' => 'required|max:100|unique:roles'

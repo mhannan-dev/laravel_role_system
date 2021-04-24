@@ -23,6 +23,13 @@ class RouteServiceProvider extends ServiceProvider
      */
     public const HOME = '/home';
 
+     /**
+     * The path to the "admin" route for admin login
+     *
+     * @var string
+     */
+    public const ADMIN_DASBOARD = '/admin';
+
     /**
      * Define your route model bindings, pattern filters, etc.
      *
