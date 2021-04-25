@@ -28,7 +28,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const ADMIN_DASBOARD = '/admin';
+    public const ADMIN_DASHBOARD = '/admin';
 
     /**
      * Define your route model bindings, pattern filters, etc.
