@@ -1,10 +1,15 @@
 <?php
+
 namespace App\Http\Controllers\Backend;
+
+use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+
 class UsersController extends Controller
 {
     /**
@@ -14,10 +19,10 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $data['title'] = "User";
-        $data['users'] = User::all();
-        return view('backend.pages.users.index', $data);
+        $users = User::all();
+        return view('backend.pages.users.index', compact('users'));
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -25,11 +30,10 @@ class UsersController extends Controller
      */
     public function create()
     {
-        $data['title'] = "Create new user";
-        $data['users'] = User::all();
-        $data['roles'] = Role::all();
-        return view('backend.pages.users.create', $data);
+        $roles  = Role::all();
+        return view('backend.pages.users.create', compact('roles'));
     }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -38,24 +42,28 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-         // Validation Data
-         $request->validate([
+        // Validation Data
+        $request->validate([
             'name' => 'required|max:50',
             'email' => 'required|max:100|email|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
+
         // Create New User
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->save();
+
         if ($request->roles) {
             $user->assignRole($request->roles);
         }
-        toastr('Data added successfully !!', 'success');
+
+        session()->flash('success', 'User has been created !!');
         return redirect()->route('admin.users.index');
     }
+
     /**
      * Display the specified resource.
      *
@@ -64,7 +72,9 @@ class UsersController extends Controller
      */
     public function show($id)
     {
+        //
     }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -73,11 +83,11 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        $data['title'] = "Edit User";
-        $data['user'] = User::findOrFail($id);
-        $data['roles'] = Role::all();
-        return view('backend.pages.users.edit', $data);
+        $user = User::find($id);
+        $roles  = Role::all();
+        return view('backend.pages.users.edit', compact('user', 'roles'));
     }
+
     /**
      * Update the specified resource in storage.
      *
@@ -87,27 +97,33 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-         // Create New User
+        // Create New User
         $user = User::find($id);
+
         // Validation Data
         $request->validate([
             'name' => 'required|max:50',
             'email' => 'required|max:100|email|unique:users,email,' . $id,
             'password' => 'nullable|min:6|confirmed',
         ]);
+
+
         $user->name = $request->name;
         $user->email = $request->email;
         if ($request->password) {
             $user->password = Hash::make($request->password);
         }
         $user->save();
+
         $user->roles()->detach();
         if ($request->roles) {
             $user->assignRole($request->roles);
         }
-        toastr('Data updated successfully !!', 'success');
+
+        session()->flash('success', 'User has been updated !!');
         return back();
     }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -116,11 +132,12 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::findOrFail($id);
+        $user = User::find($id);
         if (!is_null($user)) {
             $user->delete();
         }
-        toastr('User has been deleted !!', 'success');
+
+        session()->flash('success', 'User has been deleted !!');
         return back();
     }
 }

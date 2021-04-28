@@ -27,8 +27,8 @@ Route::group(['prefix' => 'admin'], function () {
 
      // Login Routes
      Route::get('/login', 'Backend\Auth\LoginController@showLoginForm')->name('admin.login');
-     Route::post('/login/submit', 'Backend\Auth\LoginController@do_login')->name('admin.login.submit');
- 
+     Route::post('/login/submit', 'Backend\Auth\LoginController@login')->name('admin.login.submit');
+
      // Logout Routes
      Route::post('/logout/submit', 'Backend\Auth\LoginController@logout')->name('admin.logout.submit');
 

@@ -1,20 +1,19 @@
-
 <!doctype html>
 <html class="no-js" lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Roles and Permission - @yield('title')</title>
+    <title>@yield('title', 'Laravel Role Admin')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/png" href="{{ URL::asset('backend')}}/images/icon/favicon.ico">
-    @include('backend.partials.styles')
+    @include('backend.layouts.partials.styles')
     @yield('styles')
-   
 </head>
 
 <body>
-    
+    <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
     <!-- preloader area start -->
     <div id="preloader">
         <div class="loader"></div>
@@ -22,23 +21,22 @@
     <!-- preloader area end -->
     <!-- page container area start -->
     <div class="page-container">
-        @include('backend.partials.sidebar')
+
+       @include('backend.layouts.partials.sidebar')
+
         <!-- main content area start -->
         <div class="main-content">
-           @include('backend.partials.top_nav')
-            
-            <!-- page title area end -->
-            @yield('main-content')
+            @include('backend.layouts.partials.header')
+            @yield('admin-content')
         </div>
         <!-- main content area end -->
-        <!-- footer area start-->
-        @include('backend.partials.footer')
+        @include('backend.layouts.partials.footer')
     </div>
     <!-- page container area end -->
-    @include('backend.partials.scripts')
+
+    @include('backend.layouts.partials.offsets')
+    @include('backend.layouts.partials.scripts')
     @yield('scripts')
-    @toastr_js
-    @toastr_render
 </body>
 
 </html>

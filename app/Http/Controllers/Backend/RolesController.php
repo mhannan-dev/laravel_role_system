@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Backend;
 
-use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
-use Spatie\Permission\Models\Permission;
 use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+
 class RolesController extends Controller
 {
     /**
@@ -16,10 +18,8 @@ class RolesController extends Controller
      */
     public function index()
     {
-       
-        $data['title'] = "Roles";
-        $data['roles'] = Role::all();
-        return view('backend.pages.roles.index', $data);
+        $roles = Role::all();
+        return view('backend.pages.roles.index', compact('roles'));
     }
 
     /**
@@ -29,12 +29,9 @@ class RolesController extends Controller
      */
     public function create()
     {
-        $data['title'] = "Create new permission";
-        $data['all_permissions'] = Permission::all();
-        $data['permission_groups'] = User::getpermissionGroups();
-        //dd($data['permission_groups']);
-        
-        return view('backend.pages.roles.create', $data);
+        $all_permissions  = Permission::all();
+        $permission_groups = User::getpermissionGroups();
+        return view('backend.pages.roles.create', compact('all_permissions', 'permission_groups'));
     }
 
     /**
@@ -45,20 +42,24 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
         // Validation Data
         $request->validate([
             'name' => 'required|max:100|unique:roles'
         ], [
             'name.requried' => 'Please give a role name'
         ]);
+
+        // Process Data
         $role = Role::create(['name' => $request->name]);
+
+        // $role = DB::table('roles')->where('name', $request->name)->first();
         $permissions = $request->input('permissions');
 
         if (!empty($permissions)) {
             $role->syncPermissions($permissions);
         }
-        toastr('Data added successfully !!', 'success');
+
+        session()->flash('success', 'Role has been created !!');
         return back();
     }
 
@@ -70,7 +71,7 @@ class RolesController extends Controller
      */
     public function show($id)
     {
-        
+        //
     }
 
     /**
@@ -81,11 +82,10 @@ class RolesController extends Controller
      */
     public function edit($id)
     {
-        $data['role'] = Role::findOrFail($id);
-        $data['title'] = "Create new permission";
-        $data['all_permissions'] = Permission::all();
-        $data['permission_groups'] = User::getpermissionGroups();
-        return view('backend.pages.roles.edit', $data);
+        $role = Role::findById($id);
+        $all_permissions = Permission::all();
+        $permission_groups = User::getpermissionGroups();
+        return view('backend.pages.roles.edit', compact('role', 'all_permissions', 'permission_groups'));
     }
 
     /**
@@ -97,19 +97,23 @@ class RolesController extends Controller
      */
     public function update(Request $request, $id)
     {
-         // Validation Data
-         $request->validate([
+        // Validation Data
+        $request->validate([
             'name' => 'required|max:100|unique:roles,name,' . $id
         ], [
             'name.requried' => 'Please give a role name'
         ]);
-        $role = Role::findOrFail($id);
+
+        $role = Role::findById($id);
         $permissions = $request->input('permissions');
 
         if (!empty($permissions)) {
+            $role->name = $request->name;
+            $role->save();
             $role->syncPermissions($permissions);
         }
-        toastr('Data updated successfully !!', 'success');
+
+        session()->flash('success', 'Role has been updated !!');
         return back();
     }
 
@@ -121,12 +125,12 @@ class RolesController extends Controller
      */
     public function destroy($id)
     {
-       
         $role = Role::findById($id);
         if (!is_null($role)) {
             $role->delete();
         }
-        toastr('Role has been deleted !!', 'success');
+
+        session()->flash('success', 'Role has been deleted !!');
         return back();
     }
 }
