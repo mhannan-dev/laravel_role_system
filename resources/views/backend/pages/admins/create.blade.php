@@ -26,8 +26,8 @@ User Create - Admin Panel
                 <h4 class="page-title pull-left">User Create</h4>
                 <ul class="breadcrumbs pull-left">
                     <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                    <li><a href="{{ route('admin.users.index') }}">All Users</a></li>
-                    <li><span>Create User</span></li>
+                    <li><a href="{{ route('admin.admins.index') }}">All Admins</a></li>
+                    <li><span>Create Admin</span></li>
                 </ul>
             </div>
         </div>
@@ -46,16 +46,17 @@ User Create - Admin Panel
                 <div class="card-body">
                     <h4 class="header-title">Create New Role</h4>
                     @include('backend.layouts.partials.messages')
-                    
-                    <form action="{{ route('admin.users.store') }}" method="POST">
+
+                    <form action="{{ route('admin.admins.store') }}" method="POST">
                         @csrf
                         <div class="form-row">
                             <div class="form-group col-md-6 col-sm-12">
-                                <label for="name">User Name</label>
+                                <label for="name">Name</label>
                                 <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name">
                             </div>
+
                             <div class="form-group col-md-6 col-sm-12">
-                                <label for="email">User Email</label>
+                                <label for="email">Email</label>
                                 <input type="text" class="form-control" id="email" name="email" placeholder="Enter Email">
                             </div>
                         </div>
@@ -80,15 +81,19 @@ User Create - Admin Panel
                                     @endforeach
                                 </select>
                             </div>
+                            <div class="form-group col-md-6 col-sm-12">
+                                <label for="username">Username</label>
+                                <input type="text" class="form-control" id="username" name="username" placeholder="Enter username">
+                            </div>
                         </div>
-                        
+
                         <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Save User</button>
                     </form>
                 </div>
             </div>
         </div>
         <!-- data table end -->
-        
+
     </div>
 </div>
 @endsection

@@ -44,15 +44,17 @@ class AdminsController extends Controller
     {
         // Validation Data
         $request->validate([
-            'name' => 'required|max:50',
-            'email' => 'required|max:100|email|unique:admins',
-            'password' => 'required|min:6|confirmed',
+            'name'      => 'required|max:50',
+            'username'  => 'required|max:30',
+            'email'     => 'required|max:100|email|unique:admins',
+            'password'  => 'required|min:6|confirmed',
         ]);
 
         // Create New Admin
-        $user = new Admin();
-        $user->name = $request->name;
-        $user->email = $request->email;
+        $user           = new Admin();
+        $user->name     = $request->name;
+        $user->username = $request->username;
+        $user->email    = $request->email;
         $user->password = Hash::make($request->password);
         $user->save();
 
