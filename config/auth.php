@@ -46,7 +46,7 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
-        //Custom guard
+
         'admin' => [
             'driver' => 'session',
             'provider' => 'admins',
@@ -54,7 +54,7 @@ return [
 
         'admin_api' => [
             'driver' => 'token',
-            'provider' => 'users',
+            'provider' => 'admins',
             'hash' => false,
         ],
     ],
@@ -81,16 +81,11 @@ return [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
-        //Custom 
+
         'admins' => [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
     ],
 
     /*

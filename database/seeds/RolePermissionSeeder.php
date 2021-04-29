@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
+
 class RolePermissionSeeder extends Seeder
 {
     /**
@@ -13,15 +14,16 @@ class RolePermissionSeeder extends Seeder
      */
     public function run()
     {
-
         // Create Roles
         $roleSuperAdmin = Role::create(['name' => 'superadmin']);
         $roleAdmin = Role::create(['name' => 'admin']);
         $roleEditor = Role::create(['name' => 'editor']);
         $roleUser = Role::create(['name' => 'user']);
 
-        //Permission List as array
+
+        // Permission List as array
         $permissions = [
+
             [
                 'group_name' => 'dashboard',
                 'permissions' => [
@@ -71,13 +73,8 @@ class RolePermissionSeeder extends Seeder
                 ]
             ],
         ];
-        // Create and Assign Permissions
-        // for ($i = 0; $i < count($permissions); $i++) {
-        //     // Create Permission
-        //     $permission = Permission::create(['name' => $permissions[$i]]);
-        //     $roleSuperAdmin->givePermissionTo($permission);
-        //     $permission->assignRole($roleSuperAdmin);
-        // }
+
+
         // Create and Assign Permissions
         for ($i = 0; $i < count($permissions); $i++) {
             $permissionGroup = $permissions[$i]['group_name'];
