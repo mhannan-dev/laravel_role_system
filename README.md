@@ -24,7 +24,7 @@ So, You've got the project of Laravel Role & Permission Management on your http:
 1. Assign Multiple Role to an admin
 
 ## Learn More & Discussion
-https://devsenv.com/tutorials/laravel-role-permission-management-system-full-example-with-source-code
+
 
 
 
