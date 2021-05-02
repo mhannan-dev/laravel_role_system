@@ -1,13 +1,10 @@
 <?php
-
 namespace App\Http\Controllers\Backend\Auth;
-
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
 class LoginController extends Controller
 {
     /*
@@ -20,16 +17,13 @@ class LoginController extends Controller
     | to conveniently provide its functionality to your applications.
     |
     */
-
     use AuthenticatesUsers;
-
     /**
      * Where to redirect users after login.
      *
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::ADMIN_DASHBOARD;
-
     /**
      * show login form for admin guard
      *
@@ -39,8 +33,6 @@ class LoginController extends Controller
     {
         return view('backend.auth.login');
     }
-
-
     /**
      * login admin
      *
@@ -54,24 +46,25 @@ class LoginController extends Controller
             'email' => 'required|max:50',
             'password' => 'required',
         ]);
-
         // Attempt to login
         if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
             // Redirect to dashboard
             session()->flash('success', 'Successully Logged in !');
-            return redirect()->intended(route('admin.dashboard'));
+            //return redirect()->intended('admin.dashboard');
+            $url = route('admin.dashboard');
+            return redirect()->intended($url);
         } else {
-            // Search using username 
+            // Search using username
             if (Auth::guard('admin')->attempt(['username' => $request->email, 'password' => $request->password], $request->remember)) {
                 session()->flash('success', 'Successully Logged in !');
-                return redirect()->intended(route('admin.dashboard'));
+                $url = route('admin.dashboard');
+                return redirect()->intended($url);
             }
             // error
             session()->flash('error', 'Invalid email and password');
             return back();
         }
     }
-
     /**
      * logout admin guard
      *
