@@ -10,7 +10,7 @@
     'locale' => 'en',
     'fallback_locale' => 'en',
     'faker_locale' => 'en_US',
-    'key' => 'base64:EsH1M4Jkyo5pqWP3Wg0WMig41vc09HYCawAUvw5JmBA=',
+    'key' => 'base64:V3Df8wgoHuBJjYKKsM7cVIYSECj7Di+KFbOek8356tk=',
     'cipher' => 'AES-256-CBC',
     'providers' => 
     array (
@@ -201,7 +201,7 @@
       'file' => 
       array (
         'driver' => 'file',
-        'path' => 'D:\\laragon\\www\\role_sys\\storage\\framework/cache/data',
+        'path' => 'E:\\laragon\\www\\role_system\\storage\\framework/cache/data',
       ),
       'memcached' => 
       array (
@@ -278,7 +278,7 @@
       array (
         'driver' => 'sqlite',
         'url' => NULL,
-        'database' => 'laravel_role',
+        'database' => 'role_permission',
         'prefix' => '',
         'foreign_key_constraints' => true,
       ),
@@ -288,7 +288,7 @@
         'url' => NULL,
         'host' => '127.0.0.1',
         'port' => '3306',
-        'database' => 'laravel_role',
+        'database' => 'role_permission',
         'username' => 'root',
         'password' => '',
         'unix_socket' => '',
@@ -308,7 +308,7 @@
         'url' => NULL,
         'host' => '127.0.0.1',
         'port' => '3306',
-        'database' => 'laravel_role',
+        'database' => 'role_permission',
         'username' => 'root',
         'password' => '',
         'charset' => 'utf8',
@@ -323,7 +323,7 @@
         'url' => NULL,
         'host' => '127.0.0.1',
         'port' => '3306',
-        'database' => 'laravel_role',
+        'database' => 'role_permission',
         'username' => 'root',
         'password' => '',
         'charset' => 'utf8',
@@ -367,12 +367,12 @@
       'local' => 
       array (
         'driver' => 'local',
-        'root' => 'D:\\laragon\\www\\role_sys\\storage\\app',
+        'root' => 'E:\\laragon\\www\\role_system\\storage\\app',
       ),
       'public' => 
       array (
         'driver' => 'local',
-        'root' => 'D:\\laragon\\www\\role_sys\\storage\\app/public',
+        'root' => 'E:\\laragon\\www\\role_system\\storage\\app/public',
         'url' => 'http://localhost/storage',
         'visibility' => 'public',
       ),
@@ -389,7 +389,7 @@
     ),
     'links' => 
     array (
-      'D:\\laragon\\www\\role_sys\\public\\storage' => 'D:\\laragon\\www\\role_sys\\storage\\app/public',
+      'E:\\laragon\\www\\role_system\\public\\storage' => 'E:\\laragon\\www\\role_system\\storage\\app/public',
     ),
   ),
   'hashing' => 
@@ -423,13 +423,13 @@
       'single' => 
       array (
         'driver' => 'single',
-        'path' => 'D:\\laragon\\www\\role_sys\\storage\\logs/laravel.log',
+        'path' => 'E:\\laragon\\www\\role_system\\storage\\logs/laravel.log',
         'level' => 'debug',
       ),
       'daily' => 
       array (
         'driver' => 'daily',
-        'path' => 'D:\\laragon\\www\\role_sys\\storage\\logs/laravel.log',
+        'path' => 'E:\\laragon\\www\\role_system\\storage\\logs/laravel.log',
         'level' => 'debug',
         'days' => 14,
       ),
@@ -479,7 +479,7 @@
       ),
       'emergency' => 
       array (
-        'path' => 'D:\\laragon\\www\\role_sys\\storage\\logs/laravel.log',
+        'path' => 'E:\\laragon\\www\\role_system\\storage\\logs/laravel.log',
       ),
     ),
   ),
@@ -536,7 +536,7 @@
       'theme' => 'default',
       'paths' => 
       array (
-        0 => 'D:\\laragon\\www\\role_sys\\resources\\views/vendor/mail',
+        0 => 'E:\\laragon\\www\\role_system\\resources\\views/vendor/mail',
       ),
     ),
   ),
@@ -615,7 +615,7 @@
     'lifetime' => '120',
     'expire_on_close' => false,
     'encrypt' => false,
-    'files' => 'D:\\laragon\\www\\role_sys\\storage\\framework/sessions',
+    'files' => 'E:\\laragon\\www\\role_system\\storage\\framework/sessions',
     'connection' => NULL,
     'table' => 'sessions',
     'store' => NULL,
@@ -635,9 +635,9 @@
   array (
     'paths' => 
     array (
-      0 => 'D:\\laragon\\www\\role_sys\\resources\\views',
+      0 => 'E:\\laragon\\www\\role_system\\resources\\views',
     ),
-    'compiled' => 'D:\\laragon\\www\\role_sys\\storage\\framework\\views',
+    'compiled' => 'E:\\laragon\\www\\role_system\\storage\\framework\\views',
   ),
   'flare' => 
   array (
@@ -725,6 +725,52 @@
       'key' => 'spatie.permission.cache',
       'model_key' => 'name',
       'store' => 'default',
+    ),
+  ),
+  'toastr' => 
+  array (
+    'maxItems' => NULL,
+    'options' => 
+    array (
+      'closeButton' => true,
+      'closeClass' => 'toast-close-button',
+      'closeDuration' => 300,
+      'closeEasing' => 'swing',
+      'closeHtml' => '<button><i class="icon-off"></i></button>',
+      'closeMethod' => 'fadeOut',
+      'closeOnHover' => true,
+      'containerId' => 'toast-container',
+      'debug' => false,
+      'escapeHtml' => false,
+      'extendedTimeOut' => 10000,
+      'hideDuration' => 1000,
+      'hideEasing' => 'linear',
+      'hideMethod' => 'fadeOut',
+      'iconClass' => 'toast-info',
+      'iconClasses' => 
+      array (
+        'error' => 'toast-error',
+        'info' => 'toast-info',
+        'success' => 'toast-success',
+        'warning' => 'toast-warning',
+      ),
+      'messageClass' => 'toast-message',
+      'newestOnTop' => false,
+      'onHidden' => NULL,
+      'onShown' => NULL,
+      'positionClass' => 'toast-top-right',
+      'preventDuplicates' => true,
+      'progressBar' => true,
+      'progressClass' => 'toast-progress',
+      'rtl' => false,
+      'showDuration' => 300,
+      'showEasing' => 'swing',
+      'showMethod' => 'fadeIn',
+      'tapToDismiss' => true,
+      'target' => 'body',
+      'timeOut' => 5000,
+      'titleClass' => 'toast-title',
+      'toastClass' => 'toast',
     ),
   ),
   'trustedproxy' => 

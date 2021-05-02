@@ -39,16 +39,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/logout/submit', 'Backend\Auth\LoginController@logout')->name('admin.logout.submit');
 
     // Forget Password Routes
-    Route::get('/password/reset', 'Backend\Auth\ForgotPasswordController@showLinkRequestForm')->name('admin.password.request');
-    Route::post('/password/reset/submit', 'Backend\Auth\ForgotPasswordController@reset')->name('admin.password.update');
+    Route::get('/password/reset', 'Backend\Auth\ForgetPasswordController@showLinkRequestForm')->name('admin.password.request');
+    Route::post('/password/reset/submit', 'Backend\Auth\ForgetPasswordController@reset')->name('admin.password.update');
 });
-
-
-//to clear all cache
-Route::get('/clear', function() {
-    Artisan::call('cache:clear');
-    Artisan::call('config:clear');
-    Artisan::call('config:cache');
-    Artisan::call('view:clear');
-    return "Cleared!";
- });

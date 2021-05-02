@@ -59,4 +59,15 @@
       0 => 'Spatie\\Permission\\PermissionServiceProvider',
     ),
   ),
+  'yoeunes/toastr' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Yoeunes\\Toastr\\ToastrServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Toastr' => 'Yoeunes\\Toastr\\Facades\\Toastr',
+    ),
+  ),
 );
